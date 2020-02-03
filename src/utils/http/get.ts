@@ -15,8 +15,8 @@ export default function<T>(
       })
       .catch(error => {
         subscriber.error({
-          status: error.response.status,
-          data: error.response.data,
+          status: error.response?.status,
+          data: error.response?.data,
           message: error.message,
         });
       });
