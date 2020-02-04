@@ -15,5 +15,13 @@ export interface Asset {
 export type ElementValue = string | Dictionary<Element>;
 
 export interface Article {
-  [key: string]: string | string[] | Date | Asset;
+  header: string;
+  author: string;
+  date: Date;
+  body: string[];
+  mainImage: {
+    leadImage: Asset;
+    leadImageCaption: string;
+    leadImageCredit: string;
+  };
 }
