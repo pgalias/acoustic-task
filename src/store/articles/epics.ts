@@ -10,6 +10,7 @@ import {
 } from '../../core/http/search';
 import { retrieveArticle } from '../../core/http/retrieveArticle';
 import { RootState } from '../state';
+import { Article } from '../../models/article';
 
 export const fetchArticles$ = (
   action$: Observable<ArticleActions>,
@@ -31,7 +32,7 @@ export const fetchArticles$ = (
         combineLatest(
           response.documents.map(document => retrieveArticle(document.id)),
         ).pipe(
-          map((articles: any[]) => actions.fetchArticlesSuccess(articles)),
+          map((articles: Article[]) => actions.fetchArticlesSuccess(articles)),
           catchError(error => of(actions.fetchArticlesFailure(error.message))),
         ),
       );

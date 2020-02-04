@@ -51,7 +51,12 @@ describe('Article Epics', () => {
         ],
       });
       mock.onGet('/delivery/v1/content/foobar').reply(200, {
-        foo: 'bar',
+        elements: {
+          foo: {
+            elementType: 'text',
+            value: 'bar',
+          },
+        },
       });
 
       spy = jest.spyOn(axios, 'get');

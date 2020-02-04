@@ -1,5 +1,6 @@
 import { action } from 'typesafe-actions';
 import { ArticleActionTypes } from './types';
+import { Article } from '../../models/article';
 
 export const nextPage = () => action(ArticleActionTypes.NEXT_PAGE);
 
@@ -11,8 +12,7 @@ export const fetchArticles = (pageNumber: number) => {
   return action(ArticleActionTypes.FETCH_ARTICLES_PENDING, pageNumber);
 };
 
-// @ts-ignore
-export const fetchArticlesSuccess = articles => {
+export const fetchArticlesSuccess = (articles: Article[]) => {
   return action(ArticleActionTypes.FETCH_ARTICLES_SUCCESS, articles);
 };
 

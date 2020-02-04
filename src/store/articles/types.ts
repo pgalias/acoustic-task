@@ -1,5 +1,6 @@
 import { ActionType } from 'typesafe-actions';
 import * as actions from './actions';
+import { Article } from '../../models/article';
 
 export enum ArticleActionTypes {
   NEXT_PAGE = 'articles/NEXT_PAGE',
@@ -16,7 +17,7 @@ export interface State {
   readonly pagesCount: number;
   readonly isLoading: boolean;
   readonly error: string;
-  readonly articles: any[];
+  readonly articles: Article[];
 }
 
 export type ArticleActions = ActionType<typeof actions>;
