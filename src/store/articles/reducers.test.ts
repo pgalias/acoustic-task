@@ -70,6 +70,21 @@ describe('Articles Reducer', () => {
       expect(reducer(currentState, action)).toEqual(expected);
     });
 
+    test('success action should put only unique articles', () => {
+      const currentArticles = [{ id: 24 }, { id: 25 }];
+      const currentState = { ...initialState, articles: currentArticles };
+      const action = {
+        type: ArticleActionTypes.FETCH_ARTICLES_SUCCESS,
+        payload: [{ id: 25 }, { id: 26 }],
+      } as ArticleActions;
+      const expected = {
+        ...currentState,
+        articles: [{ id: 24 }, { id: 25 }, { id: 26 }],
+      };
+
+      expect(reducer(currentState, action)).toEqual(expected);
+    });
+
     test('failure action should unset loading state and set error', () => {
       const currentState = { ...initialState, isLoading: true };
       const action = {

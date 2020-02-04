@@ -1,4 +1,5 @@
 import { ArticleActionTypes, State, ArticleActions } from './types';
+import { unionWith, isEqual } from 'lodash';
 
 export const initialState: State = {
   currentPage: 0,
@@ -33,7 +34,7 @@ export const reducer = (
       return {
         ...state,
         isLoading: false,
-        articles: action.payload,
+        articles: unionWith(state.articles, action.payload, isEqual),
       };
     case ArticleActionTypes.FETCH_ARTICLES_FAILURE:
       return {
