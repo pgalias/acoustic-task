@@ -43,9 +43,7 @@ export const changePage$ = (
   state$: StateObservable<RootState>,
 ) =>
   action$.pipe(
-    filter(
-      isOfType([ArticleActionTypes.PREV_PAGE, ArticleActionTypes.NEXT_PAGE]),
-    ),
+    filter(isOfType(ArticleActionTypes.NEXT_PAGE)),
     mergeMap(() =>
       of(actions.fetchArticles(state$.value.articles.currentPage)),
     ),

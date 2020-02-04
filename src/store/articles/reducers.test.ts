@@ -30,31 +30,6 @@ describe('Articles Reducer', () => {
     });
   });
 
-  describe('Prev Page Action', () => {
-    test('should decrease current page by 1', () => {
-      const currentState = { ...initialState, currentPage: 2 };
-      const action = {
-        type: ArticleActionTypes.PREV_PAGE,
-      } as ArticleActions;
-      const expected = {
-        ...currentState,
-        currentPage: currentState.currentPage - 1,
-      };
-
-      expect(reducer(currentState, action)).toEqual(expected);
-    });
-
-    test('should not allow decrease current page when current page is first', () => {
-      const currentState = initialState;
-      const action = {
-        type: ArticleActionTypes.PREV_PAGE,
-      } as ArticleActions;
-      const expected = { ...currentState };
-
-      expect(reducer(currentState, action)).toEqual(expected);
-    });
-  });
-
   describe('Set Page Count Action', () => {
     test('should set pages count', () => {
       const currentState = initialState;

@@ -10,21 +10,6 @@ import { toArray } from 'rxjs/operators';
 
 describe('Article Epics', () => {
   describe('changePage$ epic', () => {
-    test('prev page action should call fetching articles pending action', done => {
-      const action$ = ActionsObservable.of(articleActions.prevPage());
-      // @ts-ignore
-      const state$ = new StateObservable(new Subject<RootState>(), {
-        articles: {
-          currentPage: 2,
-        },
-      });
-      // @ts-ignore
-      changePage$(action$, state$).subscribe((actual: any) => {
-        expect(actual).toEqual(articleActions.fetchArticles(2));
-        done();
-      });
-    });
-
     test('next page action should call fetching articles pending action', done => {
       const action$ = ActionsObservable.of(articleActions.nextPage());
       // @ts-ignore

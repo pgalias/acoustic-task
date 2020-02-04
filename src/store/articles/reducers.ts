@@ -19,11 +19,6 @@ export const reducer = (
         ...state,
         currentPage: Math.min(state.currentPage + 1, state.pagesCount),
       };
-    case ArticleActionTypes.PREV_PAGE:
-      return {
-        ...state,
-        currentPage: Math.max(0, state.currentPage - 1),
-      };
     case ArticleActionTypes.SET_PAGES_COUNT:
       return {
         ...state,

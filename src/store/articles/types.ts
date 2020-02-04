@@ -3,7 +3,6 @@ import * as actions from './actions';
 
 export enum ArticleActionTypes {
   NEXT_PAGE = 'articles/NEXT_PAGE',
-  PREV_PAGE = 'articles/PREV_PAGE',
   SET_PAGES_COUNT = 'articles/SET_PAGES_COUNT',
 
   FETCH_ARTICLES_PENDING = 'articles/FETCH_ARTICLES_PENDING',
