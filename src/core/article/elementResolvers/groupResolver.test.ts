@@ -1,4 +1,5 @@
 import createMockInstance from 'jest-create-mock-instance';
+import { Dictionary } from 'lodash';
 import { GroupResolver } from './groupResolver';
 import { ArticleFactory } from '../articleFactory';
 import { Element } from '../../../models/article';
@@ -16,9 +17,9 @@ describe('GroupResolver', () => {
   test('should return group of elements when element has group type', () => {
     const formattedText = ['<p>Lorem ipsum</p>', '<span>Dolor sit amet</span>'];
 
-    const element: Element = {
+    const element: Partial<Element> = {
       elementType: 'group',
-      value: {
+      value: ({
         mainText: {
           elementType: 'text',
           value: 'Foo',
@@ -27,7 +28,7 @@ describe('GroupResolver', () => {
           elementType: 'formattedtext',
           value: formattedText,
         },
-      },
+      } as unknown) as Dictionary<Element>,
     };
 
     const expected = {
@@ -41,7 +42,7 @@ describe('GroupResolver', () => {
   });
 
   test('should undefined when element has not group type', () => {
-    const element: Element = {
+    const element: Partial<Element> = {
       elementType: 'text',
       value: 'FooBar',
     };

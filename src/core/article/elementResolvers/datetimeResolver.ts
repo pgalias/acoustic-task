@@ -5,7 +5,7 @@ import { isDate } from '../../../utils/helpers/date.helper';
 export class DatetimeResolver implements ElementResolver<Date> {
   public readonly type = ElementResolverType.DATETIME;
 
-  resolve(element: Element): Date {
+  resolve(element: Partial<Element>): Date {
     if (element.elementType !== this.type) {
       return;
     }

@@ -3,7 +3,8 @@ import { Dictionary } from 'lodash';
 export interface Element {
   elementType: string;
   value: ElementValue;
-  asset?: { altText: string; resourceUri: string };
+  values: string[];
+  asset: { altText: string; resourceUri: string };
 }
 
 export interface Asset {
@@ -11,7 +12,7 @@ export interface Asset {
   src: string;
 }
 
-export type ElementValue = string | string[] | Dictionary<Element>;
+export type ElementValue = string | Dictionary<Element>;
 
 export interface Article {
   [key: string]: string | string[] | Date | Asset;

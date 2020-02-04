@@ -9,7 +9,7 @@ describe('ImageResolver', () => {
   });
 
   test('should return asset object when element has image type', () => {
-    const element: Element = {
+    const element: Partial<Element> = {
       elementType: 'image',
       value: 'FooBar',
       asset: {
@@ -25,7 +25,7 @@ describe('ImageResolver', () => {
   });
 
   test('should return empty asset when element has image type and is without asset property', () => {
-    const element: Element = {
+    const element: Partial<Element> = {
       elementType: 'image',
       value: 'FooBar',
     };
@@ -37,7 +37,7 @@ describe('ImageResolver', () => {
   });
 
   test('should return undefined when element has not image type', () => {
-    const element: Element = {
+    const element: Partial<Element> = {
       elementType: 'text',
       value: 'FooBar',
     };

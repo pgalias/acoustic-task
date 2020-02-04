@@ -8,7 +8,7 @@ export class GroupResolver implements ElementResolver<Dictionary<Element>> {
 
   constructor(private articleFactory: ArticleFactory) {}
 
-  resolve(element: Element): Dictionary<Element> {
+  resolve(element: Partial<Element>): Dictionary<Element> {
     if (element.elementType !== this.type) {
       return;
     }

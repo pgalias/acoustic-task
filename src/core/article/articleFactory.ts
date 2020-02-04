@@ -6,7 +6,7 @@ import { Element } from '../../models/article';
 export class ArticleFactory {
   constructor(private resolverAggregate: ElementResolverAggregate) {}
 
-  create(elements: Dictionary<Element>) {
+  create(elements: Dictionary<Partial<Element>>) {
     return flow(
       map(([key, element]): [string, Element] => [
         key,

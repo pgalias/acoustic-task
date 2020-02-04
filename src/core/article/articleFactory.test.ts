@@ -4,13 +4,13 @@ import { Dictionary } from 'lodash';
 import articleFactory from './index';
 import { ArticleFactory } from './articleFactory';
 import { ElementResolverAggregate } from './elementResolverAggregate';
-import { Element } from '../../models/article';
+import { Element, ElementValue } from '../../models/article';
 
 describe('ArticleFactory', () => {
   describe('unit test', () => {
     let factory: ArticleFactory;
     let aggregate: jest.Mocked<ElementResolverAggregate>;
-    let elements: Dictionary<Element>;
+    let elements: Dictionary<Partial<Element>>;
 
     beforeEach(() => {
       elements = {
@@ -20,7 +20,7 @@ describe('ArticleFactory', () => {
         },
         bar: {
           elementType: 'formattedtext',
-          value: ['<span>Bar</span>'],
+          values: ['<span>Bar</span>'],
         },
         baz: {
           elementType: 'datetime',
@@ -55,7 +55,7 @@ describe('ArticleFactory', () => {
   });
 
   describe('Integration test', () => {
-    let elements: Dictionary<Element>;
+    let elements: Dictionary<Partial<Element>>;
 
     beforeEach(() => {
       elements = {
@@ -65,7 +65,7 @@ describe('ArticleFactory', () => {
         },
         body: {
           elementType: 'formattedtext',
-          value: ['<p>Lorem ipsum</p>', '<p>Lorem ipsum</p>'],
+          values: ['<p>Lorem ipsum</p>', '<p>Lorem ipsum</p>'],
         },
         cover: {
           elementType: 'image',
@@ -77,7 +77,7 @@ describe('ArticleFactory', () => {
         },
         aux: {
           elementType: 'group',
-          value: {
+          value: ({
             caption: {
               elementType: 'text',
               value: 'Im so captiony',
@@ -86,7 +86,7 @@ describe('ArticleFactory', () => {
               elementType: 'text',
               value: 'Im so authory',
             },
-          },
+          } as unknown) as ElementValue,
         },
       };
     });

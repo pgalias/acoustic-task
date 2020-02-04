@@ -4,7 +4,7 @@ import { ElementResolver } from './elementResolvers/elementResolver';
 export class ElementResolverAggregate {
   private resolvers: ElementResolver<any>[] = [];
 
-  resolve(element: Element) {
+  resolve(element: Partial<Element>) {
     for (const resolver of this.resolvers) {
       const resolved = resolver.resolve(element);
 

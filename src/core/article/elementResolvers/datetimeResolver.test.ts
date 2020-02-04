@@ -9,7 +9,7 @@ describe('DatetimeResolver', () => {
   });
 
   test('should return parsed date if element has datetime type', () => {
-    const element: Element = {
+    const element: Partial<Element> = {
       elementType: 'datetime',
       value: '2019-10-20T22:00:00Z',
     };
@@ -20,7 +20,7 @@ describe('DatetimeResolver', () => {
   });
 
   test('should return undefined if element has datetime type and invalid date as value', () => {
-    const element: Element = {
+    const element: Partial<Element> = {
       elementType: 'datetime',
       value: 'foobar',
     };
@@ -29,7 +29,7 @@ describe('DatetimeResolver', () => {
   });
 
   test('should return undefined if element has not datetime type', () => {
-    const element: Element = {
+    const element: Partial<Element> = {
       elementType: 'text',
       value: 'foobar',
     };

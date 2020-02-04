@@ -4,7 +4,7 @@ import { Element } from '../../models/article';
 
 describe('ElementResolverAggregate', () => {
   let aggregate: ElementResolverAggregate;
-  let element: Element;
+  let element: Partial<Element>;
 
   beforeEach(() => {
     aggregate = new ElementResolverAggregate();

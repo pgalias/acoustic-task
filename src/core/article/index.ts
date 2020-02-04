@@ -10,6 +10,7 @@ const resolvers: ElementResolver<any>[] = [
   new resolver.ImageResolver(),
   new resolver.DatetimeResolver(),
   new resolver.GroupResolver(factory),
+  new resolver.FormattedTextResolver(),
 ];
 
 resolvers.forEach(resolver => aggregate.addResolver(resolver));
