@@ -8,7 +8,7 @@ test('it should render article with given Article object', () => {
     id: 'foo',
     heading: 'Im so heady',
     body: ['<p>Im</p>', '<p>so</p>', '<p>body</p>'],
-    date: new Date(),
+    date: new Date('02.05.2020'),
     author: 'Im so authory',
     mainImage: {
       leadImage: {
