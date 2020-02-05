@@ -1,13 +1,13 @@
 import React, { FunctionComponent } from 'react';
-import styles from './text.module.scss';
 
 interface Props {
-  children: string;
+  children: React.ReactNode;
+  className?: string;
 }
 
-const Text: FunctionComponent<Props> = ({ children }: Props) => {
+const Text: FunctionComponent<Props> = ({ children, className }: Props) => {
   return (
-    <p data-testid="text" className={styles.text}>
+    <p data-testid="text" className={className}>
       {children}
     </p>
   );

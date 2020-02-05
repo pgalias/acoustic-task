@@ -1,0 +1,46 @@
+@import "../../assets/scss/mq";
+$radius: 15px;
+
+.article {
+  position: relative;
+
+  .heading {
+    position: relative;
+  }
+
+  .content {
+    font-size: 1.3em;
+  }
+
+  .image {
+    border-radius: $radius;
+  }
+
+  .ribbon {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    border-radius: 0 0 $radius $radius;
+    padding: 1rem 0;
+    background-color: rgba(#000, 0.6);
+
+    @include from(md) {
+      padding: 2.3rem 0 1.55rem;
+    }
+
+    .text {
+      margin: 0;
+    }
+
+    .date {
+      text-align: right;
+    }
+
+    .header {
+      margin: 0;
+      text-align: center;
+    }
+  }
+}

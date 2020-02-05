@@ -1,0 +1,19 @@
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+@function fluid-typography(
+  $min-font-size,
+  $max-font-size,
+  $min-viewport,
+  $max-viewport
+) {
+  @return calc(
+    #{$min-font-size} +
+    #{strip-unit($max-font-size - $min-font-size)} *
+    (
+      (100vw - #{$min-viewport}) /
+      #{strip-unit($max-viewport - $min-viewport)}
+    )
+  );
+}

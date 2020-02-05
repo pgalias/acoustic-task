@@ -1,0 +1,33 @@
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+);
+
+@function get-width-by-size($size) {
+  @if not map-has-key($grid-breakpoints, $size) {
+    @error 'There is not #{$size} breakpoint';
+  }
+
+  @return map-get($grid-breakpoints, $size);
+}
+
+@mixin from($from) {
+  @media screen and (min-width: get-width-by-size($from)) {
+    @content;
+  }
+}
+
+@mixin to($to) {
+  @media screen and (max-width: get-width-by-size($to)) {
+    @content;
+  }
+}
+
+@mixin between($from, $to) {
+  @media screen and (min-width: $from) and (max-width: $to) {
+    @content;
+  }
+}

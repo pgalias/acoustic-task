@@ -18,3 +18,12 @@ test('it should render empty container when given array is empty', () => {
   expect(container.childElementCount).toBe(0);
   expect(container.innerHTML).toBe('');
 });
+
+test('it should truncate output when limit prop was passed', () => {
+  const { getByTestId } = render(
+    <FormattedText texts={['<p>Foo bar</p>', '<p>Bar Baz</p>']} limit={10} />,
+  );
+  const container = getByTestId('formatted-text-container');
+
+  expect(container.innerHTML).toBe('<p>Foo bar</p><p>Bar...</p>');
+});

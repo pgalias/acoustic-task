@@ -15,7 +15,8 @@ export interface Asset {
 export type ElementValue = string | Dictionary<Element>;
 
 export interface Article {
-  header: string;
+  id: string;
+  heading: string;
   author: string;
   date: Date;
   body: string[];
