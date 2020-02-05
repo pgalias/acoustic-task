@@ -1,0 +1,28 @@
+@import "../../../assets/scss/mixins";
+$color: #0dc5c1;
+
+.loader {
+  position: relative;
+
+  margin: 60px auto;
+  font-size: 10px;
+  text-indent: -9999em;
+
+  border: 1em solid rgba($color, 0.2);
+  border-left-color: $color;
+  animation: loader 1s infinite linear;
+
+  &, &::after {
+    @include same(width height, 10em);
+    border-radius: 50%;
+  }
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
