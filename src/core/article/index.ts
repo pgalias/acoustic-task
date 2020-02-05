@@ -3,7 +3,8 @@ import { ArticleFactory } from './articleFactory';
 import { ElementResolverAggregate } from './elementResolverAggregate';
 import * as resolver from './elementResolvers';
 import { ElementResolver } from './elementResolvers/elementResolver';
-import { Article, Element } from '../../models/article';
+import { Article } from '../../models/article';
+import { Element } from '../../models/element';
 
 const aggregate = new ElementResolverAggregate();
 const factory = new ArticleFactory<Article>(aggregate);

@@ -1,18 +1,4 @@
-import { Dictionary } from 'lodash';
-
-export interface Element {
-  elementType: string;
-  value: ElementValue;
-  values: string[];
-  asset: { altText: string; resourceUri: string };
-}
-
-export interface Asset {
-  alt: string;
-  src: string;
-}
-
-export type ElementValue = string | Dictionary<Element>;
+import { Asset } from './asset';
 
 export interface Article {
   id: string;

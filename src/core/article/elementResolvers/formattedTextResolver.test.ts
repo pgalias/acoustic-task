@@ -1,5 +1,5 @@
 import { FormattedTextResolver } from './formattedTextResolver';
-import { Element } from '../../../models/article';
+import { Element } from '../../../models/element';
 
 describe('FormattedTextResolver', () => {
   let resolver: FormattedTextResolver;

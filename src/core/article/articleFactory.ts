@@ -1,7 +1,7 @@
 import { Dictionary } from 'lodash';
 import { flow, fromPairs, map, toPairs } from 'lodash/fp';
 import { ElementResolverAggregate } from './elementResolverAggregate';
-import { Element } from '../../models/article';
+import { Element } from '../../models/element';
 
 export class ArticleFactory<T> {
   constructor(private resolverAggregate: ElementResolverAggregate) {}

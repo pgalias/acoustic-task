@@ -1,4 +1,4 @@
-import { Element } from '../../../models/article';
+import { Element } from '../../../models/element';
 
 export enum ElementResolverType {
   DATETIME = 'datetime',

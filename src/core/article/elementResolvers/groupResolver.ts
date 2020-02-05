@@ -1,6 +1,6 @@
 import { Dictionary } from 'lodash';
 import { ElementResolver, ElementResolverType } from './elementResolver';
-import { Element } from '../../../models/article';
+import { Element } from '../../../models/element';
 import { ArticleFactory } from '../articleFactory';
 
 export class GroupResolver implements ElementResolver<Dictionary<Element>> {

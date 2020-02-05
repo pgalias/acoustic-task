@@ -1,5 +1,5 @@
 import { ImageResolver } from './imageResolver';
-import { Element } from '../../../models/article';
+import { Element } from '../../../models/element';
 
 describe('ImageResolver', () => {
   let resolver: ImageResolver;

@@ -2,14 +2,16 @@ import createMockInstance from 'jest-create-mock-instance';
 import { Dictionary } from 'lodash';
 import { GroupResolver } from './groupResolver';
 import { ArticleFactory } from '../articleFactory';
-import { Element } from '../../../models/article';
+import { Element } from '../../../models/element';
 
 describe('GroupResolver', () => {
   let resolver: GroupResolver;
-  let factory: jest.Mocked<ArticleFactory>;
+  let factory: jest.Mocked<ArticleFactory<Dictionary<any>>>;
 
   beforeEach(() => {
-    factory = createMockInstance(ArticleFactory);
+    factory = createMockInstance(ArticleFactory) as jest.Mocked<
+      ArticleFactory<Dictionary<any>>
+    >;
 
     resolver = new GroupResolver(factory);
   });
@@ -28,10 +30,10 @@ describe('GroupResolver', () => {
           elementType: 'formattedtext',
           value: formattedText,
         },
-      } as unknown) as Dictionary<Element>,
+      } as unknown) as Dictionary<any>,
     };
 
-    const expected = {
+    const expected: Dictionary<any> = {
       mainText: 'Foo',
       secondaryText: formattedText,
     };

@@ -1,4 +1,4 @@
-import { Element } from '../../models/article';
+import { Element } from '../../models/element';
 import { ElementResolver } from './elementResolvers/elementResolver';
 
 export class ElementResolverAggregate {

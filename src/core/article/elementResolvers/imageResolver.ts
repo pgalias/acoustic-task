@@ -1,5 +1,6 @@
 import { ElementResolver, ElementResolverType } from './elementResolver';
-import { Element, Asset } from '../../../models/article';
+import { Element } from '../../../models/element';
+import { Asset } from '../../../models/asset';
 
 export class ImageResolver implements ElementResolver<Asset> {
   public readonly type = ElementResolverType.IMAGE;

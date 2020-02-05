@@ -4,7 +4,8 @@ import { Dictionary } from 'lodash';
 import articleFactory from './index';
 import { ArticleFactory } from './articleFactory';
 import { ElementResolverAggregate } from './elementResolverAggregate';
-import { Article, Element, ElementValue } from '../../models/article';
+import { Article } from '../../models/article';
+import { Element, ElementValue } from '../../models/element';
 
 describe('ArticleFactory', () => {
   describe('unit test', () => {

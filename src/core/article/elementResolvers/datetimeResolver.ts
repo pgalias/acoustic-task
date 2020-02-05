@@ -1,5 +1,5 @@
 import { ElementResolver, ElementResolverType } from './elementResolver';
-import { Element } from '../../../models/article';
+import { Element } from '../../../models/element';
 import { isDate } from '../../../utils/helpers/date.helper';
 
 export class DatetimeResolver implements ElementResolver<Date> {

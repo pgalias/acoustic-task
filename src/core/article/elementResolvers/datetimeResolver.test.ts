@@ -1,5 +1,5 @@
 import { DatetimeResolver } from './datetimeResolver';
-import { Element } from '../../../models/article';
+import { Element } from '../../../models/element';
 
 describe('DatetimeResolver', () => {
   let resolver: DatetimeResolver;

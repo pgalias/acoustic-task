@@ -2,7 +2,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Dictionary } from 'lodash';
 import { get } from '../../utils/http';
-import { Article, Element } from '../../models/article';
+import { Article } from '../../models/article';
+import { Element } from '../../models/element';
 import articleFactory from '../article';
 
 export interface Response {

@@ -1,6 +1,6 @@
 import { ElementResolverAggregate } from './elementResolverAggregate';
 import * as resolver from './elementResolvers';
-import { Element } from '../../models/article';
+import { Element } from '../../models/element';
 
 describe('ElementResolverAggregate', () => {
   let aggregate: ElementResolverAggregate;
