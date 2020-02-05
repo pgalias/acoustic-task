@@ -34,6 +34,8 @@ class InfinityScroll extends React.Component<Props, {}> {
       window.removeEventListener('scroll', this.scrollHandler);
     }
 
+    console.log('this.props', this.props);
+
     this.onScroll();
   }
 
@@ -55,9 +57,9 @@ class InfinityScroll extends React.Component<Props, {}> {
 
     return (
       <React.Fragment>
-        <Grid container spacing={2}>
+        <Grid container spacing={3}>
           {React.Children.map(this.props.children, (child: React.ReactNode) => (
-            <Grid item xs={12} md={6} lg={4}>
+            <Grid item xs={12} md={6} lg={4} style={{ margin: '1.5rem 0' }}>
               {child}
             </Grid>
           ))}

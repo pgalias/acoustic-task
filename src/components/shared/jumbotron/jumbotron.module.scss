@@ -1,0 +1,14 @@
+@import "../../../assets/scss/mq";
+@import "../../../assets/scss/shadows";
+
+.jumbotron {
+  @extend .shadow-dp2;
+  background: #fff no-repeat center/cover;
+  background-blend-mode: multiply;
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+
+  @include from(sm) {
+    padding: 4rem 2rem;
+  }
+}
