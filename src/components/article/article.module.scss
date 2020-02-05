@@ -1,7 +1,7 @@
 @import "../../assets/scss/mq";
 @import "../../assets/scss/mixins";
 @import "../../assets/scss/shadows";
-$radius: 15px 15px 0 0;
+$radius: 15px;
 
 .article {
   @extend .shadow-dp1;
@@ -9,7 +9,10 @@ $radius: 15px 15px 0 0;
   transition: box-shadow 0.5s,
               transform 0.5s;
   position: relative;
+
   height: 100%;
+  background: rgba(#000, 0.6) no-repeat center/cover;
+  background-blend-mode: multiply;
 
   &:hover {
     @extend .shadow-dp2;
@@ -20,20 +23,18 @@ $radius: 15px 15px 0 0;
     position: relative;
   }
 
-  .content {
-    font-size: 1.3em;
+  .text {
+    margin: 0;
+  }
 
-    .text {
-      margin: 0;
-    }
-
-    .date {
-      text-align: right;
-    }
+  .date {
+    text-align: right;
   }
 
   .contentBody {
-    margin-bottom: 1em;
+    margin: 1em 0;
+    height: 7em;
+    font-size: 1.1rem;
   }
 
   .image {
@@ -44,6 +45,20 @@ $radius: 15px 15px 0 0;
 
   .imageContainer {
     height: 270px;
+  }
+
+  .header {
+    margin: 0;
+    padding: 1rem 0;
+    text-align: center;
+  }
+
+  .divider {
+    background-color: rgba(#fff, 0.6);
+  }
+
+  .buttonContainer {
+    margin: 1rem 0;
   }
 
   .ribbon {
@@ -58,9 +73,6 @@ $radius: 15px 15px 0 0;
       padding: 2.3rem 0 1.55rem;
     }
 
-    .header {
-      margin: 0;
-      text-align: center;
-    }
+
   }
 }
