@@ -27,8 +27,8 @@ const Article: FunctionComponent<Props> = (props: Props) => {
       <Container>
         <Grid container alignItems="center">
           {heading && (
-            <Grid item xs={12}>
-              <h4 className={styles.header}>{heading}</h4>
+            <Grid item xs={12} data-testid="heading">
+              <h4 className={`${styles.header} text-truncated`}>{heading}</h4>
             </Grid>
           )}
 
@@ -36,13 +36,13 @@ const Article: FunctionComponent<Props> = (props: Props) => {
             <Grid item xs={12}>
               <Grid container alignItems="center" justify="space-between">
                 {author && (
-                  <Grid item xs>
+                  <Grid item xs={5} data-testid="author">
                     <small>Author:</small>
-                    <Text className={styles.text}>{author}</Text>
+                    <Text className={`${styles.text} text-truncated`}>{author}</Text>
                   </Grid>
                 )}
                 {date && (
-                  <Grid item xs className={styles.date}>
+                  <Grid item xs className={styles.date} data-testid="date">
                     <small>Posted:</small>
                     <Date
                       date={date}

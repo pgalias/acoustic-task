@@ -22,7 +22,6 @@ test('it should render article with given Article object', () => {
 
   const { getByTestId } = render(<Article article={article} />);
   const container = getByTestId('article');
-  const image = container.querySelector('img.image');
   const header = container.querySelector('[data-testid="heading"]');
   const body = container.querySelector(
     '[data-testid="formatted-text-container"]',
@@ -30,8 +29,7 @@ test('it should render article with given Article object', () => {
   const date = container.querySelector('[data-testid="date"]');
   const author = container.querySelector('[data-testid="author"]');
 
-  expect(image.getAttribute('src')).toBe('img.jpg');
-  expect(image.getAttribute('alt')).toBe(article.mainImage.leadImage.alt);
+  expect(container.style.backgroundImage).toContain('img.jpg');
   expect(header.textContent).toBe('Im so heady');
   expect(body.textContent).toBe('Imsobody');
   expect(date.textContent).toBe('Posted:2020-2-5');
