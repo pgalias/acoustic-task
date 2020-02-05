@@ -34,8 +34,6 @@ class InfinityScroll extends React.Component<Props, {}> {
       window.removeEventListener('scroll', this.scrollHandler);
     }
 
-    console.log('this.props', this.props);
-
     this.onScroll();
   }
 
