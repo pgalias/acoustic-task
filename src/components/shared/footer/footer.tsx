@@ -11,7 +11,7 @@ const Footer: FunctionComponent<{}> = () => (
       <a
         href="https://github.com/pgalias"
         target="_blank"
-        ref="noopener noreferrer"
+        rel="noopener noreferrer"
       >
         Paweł Galias
       </a>
