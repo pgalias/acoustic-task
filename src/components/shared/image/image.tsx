@@ -7,7 +7,7 @@ interface Props {
   className?: string;
 }
 
-const FormattedText: FunctionComponent<Props> = ({
+const Image: FunctionComponent<Props> = ({
   src,
   alt,
   className,
@@ -23,4 +23,4 @@ const FormattedText: FunctionComponent<Props> = ({
   );
 };
 
-export default FormattedText;
+export default Image;

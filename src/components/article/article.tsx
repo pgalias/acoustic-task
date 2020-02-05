@@ -16,11 +16,11 @@ const Article: FunctionComponent<Props> = (props: Props) => {
   const { heading, author, body, date, mainImage } = props.article;
 
   if (every([heading, author, body, date], isNil)) {
-    return <></>;
+    return <div data-testid="article"></div>;
   }
 
   return (
-    <div className={styles.article}>
+    <div data-testid="article" className={styles.article}>
       <div className={styles.heading}>
         {mainImage?.leadImage && (
           <Image
@@ -33,21 +33,21 @@ const Article: FunctionComponent<Props> = (props: Props) => {
           <Container>
             <Grid container spacing={1} alignItems="center">
               {author && (
-                <Grid item xs>
+                <Grid item xs data-testid="author">
                   <small>Author:</small>
                   <Text className={styles.text}>{author}</Text>
                 </Grid>
               )}
               {heading && (
                 <Box clone order={{ xs: 3, md: 2 }}>
-                  <Grid item xs={12} md={8}>
+                  <Grid item xs={12} md={8} data-testid="heading">
                     <h4 className={styles.header}>{heading}</h4>
                   </Grid>
                 </Box>
               )}
               {date && (
                 <Box clone order={{ xs: 2, md: 3 }}>
-                  <Grid item xs className={styles.date}>
+                  <Grid item xs className={styles.date} data-testid="date">
                     <small>Posted:</small>
                     <Date
                       date={date}
