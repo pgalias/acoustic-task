@@ -1,5 +1,4 @@
 import React, { FunctionComponent, useEffect, useRef } from 'react';
-import styles from './formattedText.module.scss';
 import { truncate } from '../../../utils/helpers/string.helper';
 
 interface Props {
@@ -23,7 +22,6 @@ const FormattedText: FunctionComponent<Props> = ({ texts, limit }: Props) => {
     <div
       data-testid="formatted-text-container"
       ref={container}
-      className={styles.container}
       dangerouslySetInnerHTML={{ __html: texts.join('') }}
     />
   );

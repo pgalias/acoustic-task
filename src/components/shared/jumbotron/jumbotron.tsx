@@ -14,6 +14,7 @@ const Jumbotron: FunctionComponent<Props> = ({
 }: Props) => {
   return (
     <div
+      data-testid="jumbotron"
       className={styles.jumbotron}
       style={{
         backgroundColor: backgroundColor,

@@ -6,7 +6,11 @@ interface Props {
   className?: string;
 }
 
-const DateField: FunctionComponent<Props> = ({ date, locale, className }: Props) => {
+const DateField: FunctionComponent<Props> = ({
+  date,
+  locale,
+  className,
+}: Props) => {
   const formattedDate = date.toLocaleDateString(locale);
 
   return (

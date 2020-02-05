@@ -8,7 +8,11 @@ const Footer: FunctionComponent<{}> = () => (
     <Divider variant="middle" />
     <Text className={styles.footer}>
       Created by&nbsp;
-      <a href="https://github.com/pgalias" target="_blank">
+      <a
+        href="https://github.com/pgalias"
+        target="_blank"
+        ref="noopener noreferrer"
+      >
         Paweł Galias
       </a>
     </Text>
