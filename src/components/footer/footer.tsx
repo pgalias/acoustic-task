@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from 'react';
 import { Container, Divider } from '@material-ui/core';
 import styles from './footer.module.scss';
-import Text from '../text';
+import Text from '../shared/text';
 
 const Footer: FunctionComponent<{}> = () => (
-  <Container>
-    <Divider variant="middle" />
-    <Text className={styles.footer}>
+  <Container className={styles.footer}>
+    <Divider variant="middle" className={styles.divider} />
+    <Text>
       Created by&nbsp;
       <a
         href="https://github.com/pgalias"

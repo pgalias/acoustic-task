@@ -10,7 +10,7 @@ import { Article as ArticleModel } from './models/article';
 import { hasEnoughPropsToRender } from './utils/helpers/article.helper';
 import jumbotronImage from './assets/images/jumbotron.jpg';
 import styles from './App.module.scss';
-import Footer from './components/shared/footer/footer';
+import Footer from './components/footer/footer';
 
 interface Props {
   hasMorePages: boolean;

@@ -1,6 +1,11 @@
 .footer {
   text-align: center;
   color: #000;
+  margin-top: 1.5rem;
+
+  .divider {
+    background-color: rgba(#000, 0.3);
+  }
 
   a {
     color: inherit;
