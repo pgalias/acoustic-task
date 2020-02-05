@@ -4,20 +4,24 @@ import styles from './image.module.scss';
 interface Props {
   src: string;
   alt: string;
-  className?: string;
+  imageClassName?: string;
+  containerClassName?: string;
 }
 
 const Image: FunctionComponent<Props> = ({
   src,
   alt,
-  className,
+  imageClassName,
+  containerClassName,
 }: Props) => {
-  const asset = process.env.REACT_APP_API_BASE_URL + src;
-
   return (
-    <div data-testid="image-container">
+    <div data-testid="image-container" className={containerClassName}>
       {src && (
-        <img className={`${styles.image} ${className}`} src={asset} alt={alt} />
+        <img
+          className={`${styles.image} ${imageClassName}`}
+          src={src}
+          alt={alt}
+        />
       )}
     </div>
   );

@@ -25,5 +25,5 @@ test('it should truncate output when limit prop was passed', () => {
   );
   const container = getByTestId('formatted-text-container');
 
-  expect(container.innerHTML).toBe('<p>Foo bar</p><p>Bar...</p>');
+  expect(container.innerHTML).toBe('Foo barBar...');
 });

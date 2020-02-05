@@ -15,8 +15,8 @@ const FormattedText: FunctionComponent<Props> = ({ texts, limit }: Props) => {
       return;
     }
 
-    const text = container.current.innerHTML;
-    container.current.innerHTML = truncate(text, limit);
+    const text = container.current.textContent;
+    container.current.textContent = truncate(text, limit);
   }, []);
 
   return (

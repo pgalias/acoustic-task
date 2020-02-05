@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { Box, Container, Grid } from '@material-ui/core';
-import { every, isNil } from 'lodash';
+import { Container, Grid } from '@material-ui/core';
+import { hasEnoughPropsToRender } from '../../utils/helpers/article.helper';
 import { Article as ArticleModel } from '../../models/article';
 import Image from '../shared/image';
 import Text from '../shared/text';
@@ -15,21 +15,43 @@ interface Props {
 const Article: FunctionComponent<Props> = (props: Props) => {
   const { heading, author, body, date, mainImage } = props.article;
 
-  if (every([heading, author, body, date], isNil)) {
+  if (!hasEnoughPropsToRender(props.article)) {
     return <div data-testid="article"></div>;
   }
 
   return (
     <div data-testid="article" className={styles.article}>
       <div className={styles.heading}>
-        {mainImage?.leadImage && (
+        {mainImage?.leadImage?.src ? (
           <Image
             src={mainImage.leadImage.src}
             alt={mainImage.leadImage.alt}
-            className={styles.image}
+            imageClassName={styles.image}
+            containerClassName={styles.imageContainer}
+          />
+        ) : (
+          <Image
+            src="http://placekitten.com/270/"
+            alt="kitten"
+            imageClassName={styles.image}
+            containerClassName={styles.imageContainer}
           />
         )}
-        <div className={styles.ribbon}>
+        {heading && (
+          <div className={styles.ribbon}>
+            <Container>
+              <Grid container spacing={1} alignItems="center">
+                <Grid item xs={12} data-testid="heading">
+                  <h4 className={styles.header}>{heading}</h4>
+                </Grid>
+              </Grid>
+            </Container>
+          </div>
+        )}
+      </div>
+
+      {(body?.length > 0 || author || date) && (
+        <div className={styles.content}>
           <Container>
             <Grid container spacing={1} alignItems="center">
               {author && (
@@ -38,35 +60,19 @@ const Article: FunctionComponent<Props> = (props: Props) => {
                   <Text className={styles.text}>{author}</Text>
                 </Grid>
               )}
-              {heading && (
-                <Box clone order={{ xs: 3, md: 2 }}>
-                  <Grid item xs={12} md={8} data-testid="heading">
-                    <h4 className={styles.header}>{heading}</h4>
-                  </Grid>
-                </Box>
-              )}
               {date && (
-                <Box clone order={{ xs: 2, md: 3 }}>
-                  <Grid item xs className={styles.date} data-testid="date">
-                    <small>Posted:</small>
-                    <Date
-                      date={date}
-                      locale={'pl-Pl'}
-                      className={styles.text}
-                    />
-                  </Grid>
-                </Box>
+                <Grid item xs className={styles.date} data-testid="date">
+                  <small>Posted:</small>
+                  <Date date={date} locale={'pl-Pl'} className={styles.text} />
+                </Grid>
               )}
+              <Grid item xs={12} className={styles.contentBody}>
+                <FormattedText texts={body} limit={150} />
+              </Grid>
             </Grid>
           </Container>
         </div>
-      </div>
-
-      <div className={styles.content}>
-        <Container>
-          {body && <FormattedText texts={body} limit={150} />}
-        </Container>
-      </div>
+      )}
     </div>
   );
 };

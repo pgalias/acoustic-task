@@ -4,11 +4,11 @@ import { Dictionary } from 'lodash';
 import articleFactory from './index';
 import { ArticleFactory } from './articleFactory';
 import { ElementResolverAggregate } from './elementResolverAggregate';
-import { Element, ElementValue } from '../../models/article';
+import { Article, Element, ElementValue } from '../../models/article';
 
 describe('ArticleFactory', () => {
   describe('unit test', () => {
-    let factory: ArticleFactory;
+    let factory: ArticleFactory<Article>;
     let aggregate: jest.Mocked<ElementResolverAggregate>;
     let elements: Dictionary<Partial<Element>>;
 
@@ -71,7 +71,7 @@ describe('ArticleFactory', () => {
           elementType: 'image',
           value: '',
           asset: {
-            resourceUri: 'http://localhost:3000',
+            resourceUri: 'foo.jpg',
             altText: 'some text',
           },
         },
@@ -96,7 +96,7 @@ describe('ArticleFactory', () => {
         header: 'Im so heady',
         body: ['<p>Lorem ipsum</p>', '<p>Lorem ipsum</p>'],
         cover: {
-          src: 'http://localhost:3000',
+          src: process.env.REACT_APP_API_BASE_URL + 'foo.jpg',
           alt: 'some text',
         },
         aux: {

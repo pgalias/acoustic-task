@@ -1,26 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import styles from './App.module.scss';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { Container } from '@material-ui/core';
+import InfinityScroll from './components/infinityScroll/infinityScroll';
+import Article from './components/article';
+import { articleActions } from './store';
+import { RootState } from './store/state';
+import { Article as ArticleModel } from './models/article';
+import { hasEnoughPropsToRender } from './utils/helpers/article.helper';
 
-const App = () => {
+const App = (props: any) => {
+  useEffect(() => {
+    props.dispatch(articleActions.fetchArticles(0));
+  }, []);
+
   return (
-    <div className={styles.App}>
-      <header className={styles.AppHeader}>
-        <img src={logo} className={styles.AppLogo} alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className={styles.AppLink}
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container fixed>
+      <InfinityScroll
+        hasMore={props.currentPage < props.pagesCount}
+        isLoading={props.isLoading}
+        next={() => props.dispatch(articleActions.nextPage())}
+      >
+        {props.articles
+          .filter(hasEnoughPropsToRender)
+          .map((article: ArticleModel) => (
+            <Article key={article.id} article={article} />
+          ))}
+      </InfinityScroll>
+    </Container>
   );
-}
+};
 
-export default App;
+export default connect((state: RootState) => ({
+  pageSize: state.articles.pageSize,
+  pagesCount: state.articles.pagesCount,
+  currentPage: state.articles.currentPage,
+  error: state.articles.error,
+  isLoading: state.articles.isLoading,
+  articles: state.articles.articles,
+}))(App);

@@ -30,9 +30,7 @@ test('it should render article with given Article object', () => {
   const date = container.querySelector('[data-testid="date"]');
   const author = container.querySelector('[data-testid="author"]');
 
-  expect(image.getAttribute('src')).toBe(
-    `${process.env.REACT_APP_API_BASE_URL}${article.mainImage.leadImage.src}`,
-  );
+  expect(image.getAttribute('src')).toBe('img.jpg');
   expect(image.getAttribute('alt')).toBe(article.mainImage.leadImage.alt);
   expect(header.textContent).toBe('Im so heady');
   expect(body.textContent).toBe('Imsobody');

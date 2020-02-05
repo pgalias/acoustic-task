@@ -17,7 +17,7 @@ export class ImageResolver implements ElementResolver<Asset> {
     }
 
     return {
-      src: element.asset.resourceUri,
+      src: process.env.REACT_APP_API_BASE_URL + element.asset.resourceUri,
       alt: element.asset.altText,
     };
   }

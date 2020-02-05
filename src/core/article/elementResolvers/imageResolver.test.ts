@@ -13,13 +13,13 @@ describe('ImageResolver', () => {
       elementType: 'image',
       value: 'FooBar',
       asset: {
-        resourceUri: 'http://localhost:3000',
+        resourceUri: 'foo.jpg',
         altText: 'FooBar',
       },
     };
 
     expect(resolver.resolve(element)).toEqual({
-      src: 'http://localhost:3000',
+      src: process.env.REACT_APP_API_BASE_URL + 'foo.jpg',
       alt: 'FooBar',
     });
   });
