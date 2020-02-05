@@ -1,65 +1,74 @@
-import React, { useEffect, useRef, FunctionComponent } from 'react';
+import React from 'react';
 import { Grid } from '@material-ui/core';
 import { debounce } from 'lodash';
+import Loader from '../shared/loader';
 
 interface Props {
-  fetchNext: () => void;
-  loader: React.ReactNode;
+  next: () => void;
   isLoading: boolean;
   hasMore: boolean;
   children: React.ReactNode;
   threshold?: number;
 }
 
-const InfinityScroll: FunctionComponent<Props> = (props: Props) => {
-  const sentinel = useRef(null);
+class InfinityScroll extends React.Component<Props, {}> {
+  public static defaultProps: Pick<Props, 'threshold'> = {
+    threshold: 100,
+  };
 
-  const infinityScroll = () => {
-    if (!props.hasMore || props.isLoading) {
+  private sentinel: HTMLDivElement;
+  private scrollHandler: () => void;
+
+  componentDidMount(): void {
+    this.scrollHandler = debounce(this.onScroll, 200);
+
+    window.addEventListener('scroll', this.scrollHandler);
+  }
+
+  componentWillUnmount(): void {
+    window.addEventListener('scroll', this.scrollHandler);
+  }
+
+  componentDidUpdate(): void {
+    if (!this.props.hasMore) {
+      window.removeEventListener('scroll', this.scrollHandler);
+    }
+
+    this.onScroll();
+  }
+
+  onScroll = () => {
+    if (!this.props.hasMore || this.props.isLoading) {
       return;
     }
 
     const sentinelRelativePosition =
-      sentinel.current.getBoundingClientRect().top - window.innerHeight;
+      this.sentinel.getBoundingClientRect().top - window.innerHeight;
 
-    if (sentinelRelativePosition < props.threshold) {
-      props.fetchNext();
+    if (sentinelRelativePosition < this.props.threshold) {
+      this.props.next();
     }
   };
-  const infinityScrollDebounced = debounce(infinityScroll, 200);
 
-  useEffect(() => {
-    window.addEventListener('scroll', infinityScrollDebounced);
-  }, []);
+  render = () => {
+    const sentinel = <div ref={i => (this.sentinel = i)} />;
 
-  useEffect(() => {
-    if (!props.hasMore) {
-      return window.removeEventListener('scroll', infinityScrollDebounced);
-    }
-  }, [props.hasMore]);
+    return (
+      <React.Fragment>
+        <Grid container spacing={1}>
+          {React.Children.map(this.props.children, (child: React.ReactNode) => (
+            <Grid item xs={12} md={6} lg={4}>
+              {child}
+            </Grid>
+          ))}
+        </Grid>
 
-  useEffect(() => {
-    infinityScroll();
-  });
+        {this.props.isLoading && <Loader />}
 
-  return (
-    <React.Fragment>
-      <Grid container spacing={1}>
-        {React.Children.map(props.children, (child: React.ReactNode) => (
-          <Grid item xs={12} md={6} lg={3}>
-            {child}
-          </Grid>
-        ))}
-      </Grid>
-
-      {props.isLoading && props.loader}
-
-      <div ref={sentinel} />
-    </React.Fragment>
-  );
-};
-InfinityScroll.defaultProps = {
-  threshold: 100,
-};
+        {sentinel}
+      </React.Fragment>
+    );
+  };
+}
 
 export default InfinityScroll;
