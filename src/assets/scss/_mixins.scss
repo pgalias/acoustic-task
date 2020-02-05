@@ -1,0 +1,9 @@
+@mixin same($properties, $value) {
+  @if not type_of($properties) == 'list' {
+    @error 'First argument should be a list';
+  }
+
+  @each $property in $properties {
+    #{$property}: $value;
+  }
+}
