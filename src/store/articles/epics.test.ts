@@ -6,7 +6,7 @@ import { ArticleActions } from './types';
 import * as articleActions from './actions';
 import { Subject } from 'rxjs';
 import { RootState } from '../state';
-import { toArray } from 'rxjs/operators';
+import { defaultIfEmpty, toArray } from 'rxjs/operators';
 
 describe('Article Epics', () => {
   describe('changePage$ epic', () => {
@@ -15,7 +15,9 @@ describe('Article Epics', () => {
       // @ts-ignore
       const state$ = new StateObservable(new Subject<RootState>(), {
         articles: {
+          pagesCount: 3,
           currentPage: 2,
+          isLoading: false,
         },
       });
       // @ts-ignore
@@ -23,6 +25,44 @@ describe('Article Epics', () => {
         expect(actual).toEqual(articleActions.fetchArticles(2));
         done();
       });
+    });
+
+    test('next page action should not call fetching articles pending action when articles are already loading', done => {
+      const action$ = ActionsObservable.of(articleActions.nextPage());
+      // @ts-ignore
+      const state$ = new StateObservable(new Subject<RootState>(), {
+        articles: {
+          pagesCount: 3,
+          currentPage: 2,
+          isLoading: true,
+        },
+      });
+      // @ts-ignore
+      changePage$(action$, state$)
+        .pipe(defaultIfEmpty('foo'))
+        .subscribe((actual: any) => {
+          expect(actual).toEqual('foo');
+          done();
+        });
+    });
+
+    test('next page action should not call fetching articles when last page has been reached', done => {
+      const action$ = ActionsObservable.of(articleActions.nextPage());
+      // @ts-ignore
+      const state$ = new StateObservable(new Subject<RootState>(), {
+        articles: {
+          pagesCount: 2,
+          currentPage: 3,
+          isLoading: false,
+        },
+      });
+      // @ts-ignore
+      changePage$(action$, state$)
+        .pipe(defaultIfEmpty('bar'))
+        .subscribe((actual: any) => {
+          expect(actual).toEqual('bar');
+          done();
+        });
     });
   });
 
@@ -82,6 +122,7 @@ describe('Article Epics', () => {
             articleActions.setPagesCount(1),
             articleActions.fetchArticlesSuccess([
               {
+                // @ts-ignore
                 foo: 'bar',
               },
             ]),

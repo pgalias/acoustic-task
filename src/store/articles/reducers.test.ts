@@ -1,5 +1,6 @@
 import { reducer, initialState } from './reducers';
-import { ArticleActions, ArticleActionTypes } from './types';
+import { ArticleActions, ArticleActionTypes, State } from './types';
+import { createArticleStub } from '../../utils/helpers/article.helper';
 
 describe('Articles Reducer', () => {
   describe('Next Page Action', () => {
@@ -55,31 +56,38 @@ describe('Articles Reducer', () => {
       expect(reducer(currentState, action)).toEqual(expected);
     });
 
-    test('success action should unset loading state and add articles', () => {
-      const currentState = { ...initialState, isLoading: true };
+    test('success action should unset loading state (and errors) and add articles', () => {
+      const article = createArticleStub();
+
+      const currentState = { ...initialState, isLoading: true, error: 'foo' };
       const action = {
         type: ArticleActionTypes.FETCH_ARTICLES_SUCCESS,
-        payload: [{ foo: 'bar' }],
+        payload: [article],
       } as ArticleActions;
-      const expected = {
+      const expected: State = {
         ...currentState,
         isLoading: false,
-        articles: [{ foo: 'bar' }],
+        error: null,
+        articles: [article],
       };
 
       expect(reducer(currentState, action)).toEqual(expected);
     });
 
     test('success action should put only unique articles', () => {
-      const currentArticles = [{ id: 24 }, { id: 25 }];
+      const article1 = createArticleStub({ id: '24 ' });
+      const article2 = createArticleStub({ id: '25 ' });
+      const article3 = createArticleStub({ id: '26 ' });
+
+      const currentArticles = [article1, article2];
       const currentState = { ...initialState, articles: currentArticles };
       const action = {
         type: ArticleActionTypes.FETCH_ARTICLES_SUCCESS,
-        payload: [{ id: 25 }, { id: 26 }],
+        payload: [article2, article3],
       } as ArticleActions;
       const expected = {
         ...currentState,
-        articles: [{ id: 24 }, { id: 25 }, { id: 26 }],
+        articles: [article1, article2, article3],
       };
 
       expect(reducer(currentState, action)).toEqual(expected);

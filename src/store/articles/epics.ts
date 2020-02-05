@@ -45,6 +45,11 @@ export const changePage$ = (
 ) =>
   action$.pipe(
     filter(isOfType(ArticleActionTypes.NEXT_PAGE)),
+    filter(() => !state$.value.articles.isLoading),
+    filter(
+      () =>
+        state$.value.articles.pagesCount >= state$.value.articles.currentPage,
+    ),
     mergeMap(() =>
       of(actions.fetchArticles(state$.value.articles.currentPage)),
     ),

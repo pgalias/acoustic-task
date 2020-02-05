@@ -34,6 +34,7 @@ export const reducer = (
       return {
         ...state,
         isLoading: false,
+        error: null,
         articles: unionWith(state.articles, action.payload, isEqual),
       };
     case ArticleActionTypes.FETCH_ARTICLES_FAILURE:
