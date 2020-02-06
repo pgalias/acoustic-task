@@ -15,5 +15,6 @@ export function searchForArticle(
     fl: 'id',
     rows: pageSize,
     start: pageSize * pageNumber,
+    sort: 'lastModified desc',
   });
 }

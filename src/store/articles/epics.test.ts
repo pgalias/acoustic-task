@@ -102,6 +102,10 @@ describe('Article Epics', () => {
       spy = jest.spyOn(axios, 'get');
     });
 
+    afterEach(() => {
+      spy.mockClear();
+    });
+
     test('fetch articles pending should call set pages count and fetch articles success on successful fetching data from API', done => {
       // @ts-ignore
       fetchArticles$(action$, state$)
@@ -151,6 +155,30 @@ describe('Article Epics', () => {
 
           expect(actual).toEqual([
             articleActions.setPagesCount(1),
+            articleActions.fetchArticlesFailure(expect.any(String)),
+          ]);
+
+          done();
+        });
+    });
+
+    test('fetch articles pending should call fetch articles failure on fail fetching pages count from API', done => {
+      mock.onGet('/delivery/v1/search').reply(400);
+
+      // @ts-ignore
+      fetchArticles$(action$, state$)
+        .pipe(toArray())
+        .subscribe((actual: any) => {
+          expect(spy).toHaveBeenCalledWith(
+            '/delivery/v1/search',
+            expect.any(Object),
+          );
+          expect(spy).not.toHaveBeenCalledWith(
+            '/delivery/v1/content/foobar',
+            expect.any(Object),
+          );
+
+          expect(actual).toEqual([
             articleActions.fetchArticlesFailure(expect.any(String)),
           ]);
 

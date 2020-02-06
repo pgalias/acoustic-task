@@ -12,6 +12,8 @@ import { retrieveArticle } from '../../core/http/retrieveArticle';
 import { RootState } from '../state';
 import { Article } from '../../models/article';
 
+const errorHandling = (e: Error) => of(actions.fetchArticlesFailure(e.message));
+
 export const fetchArticles$ = (
   action$: Observable<ArticleActions>,
   state$: StateObservable<RootState>,
@@ -19,24 +21,28 @@ export const fetchArticles$ = (
   action$.pipe(
     filter(isOfType(ArticleActionTypes.FETCH_ARTICLES_PENDING)),
     switchMap(({ payload }) =>
-      searchForArticle(state$.value.articles.pageSize, payload),
-    ),
-    mergeMap((response: SearchResponse) => {
-      const pagesCount = Math.max(
-        1,
-        Math.ceil(response.numFound / state$.value.articles.pageSize) - 1,
-      );
+      searchForArticle(state$.value.articles.pageSize, payload).pipe(
+        mergeMap((response: SearchResponse) => {
+          const pagesCount = Math.max(
+            1,
+            Math.ceil(response.numFound / state$.value.articles.pageSize) - 1,
+          );
 
-      return concat(
-        of(actions.setPagesCount(pagesCount)),
-        combineLatest(
-          response.documents.map(document => retrieveArticle(document.id)),
-        ).pipe(
-          map((articles: Article[]) => actions.fetchArticlesSuccess(articles)),
-          catchError(error => of(actions.fetchArticlesFailure(error.message))),
-        ),
-      );
-    }),
+          return concat(
+            of(actions.setPagesCount(pagesCount)),
+            combineLatest(
+              response.documents.map(document => retrieveArticle(document.id)),
+            ).pipe(
+              map((articles: Article[]) =>
+                actions.fetchArticlesSuccess(articles),
+              ),
+              catchError(errorHandling),
+            ),
+          );
+        }),
+        catchError(errorHandling),
+      ),
+    ),
   );
 
 export const changePage$ = (
